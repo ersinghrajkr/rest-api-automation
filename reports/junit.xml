@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="7" failures="2" errors="0" time="9.877">
+  <testsuite name="BRAND Tests" errors="0" failures="1" skipped="0" timestamp="2023-08-28T14:50:38" time="5.621" tests="1">
+    <testcase classname="BRAND Tests GET /brands" name="BRAND Tests GET /brands" time="3.351">
+      <failure>TypeError: Cannot convert undefined or null to object
+    at Function.keys (&lt;anonymous&gt;)
+    at Object.&lt;anonymous&gt; (C:\RajKumar\#SDET\rest-api-automation\test\specs\brand.spec.ts:8:46)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="POC Tests" errors="0" failures="1" skipped="0" timestamp="2023-08-28T14:50:38" time="9.426" tests="6">
+    <testcase classname="POC Tests GET /posts" name="POC Tests GET /posts" time="0.747">
+    </testcase>
+    <testcase classname="POC Tests GET /comments with query params" name="POC Tests GET /comments with query params" time="0.665">
+    </testcase>
+    <testcase classname="POC Tests POST /post" name="POC Tests POST /post" time="0.855">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: &quot;Hello Dude&quot;
+Received: undefined
+    at Object.&lt;anonymous&gt; (C:\RajKumar\#SDET\rest-api-automation\test\specs\poc.spec.ts:36:32)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)</failure>
+    </testcase>
+    <testcase classname="POC Tests PUT /posts/{id}" name="POC Tests PUT /posts/{id}" time="1.491">
+    </testcase>
+    <testcase classname="POC Tests PATCH /posts/{id}" name="POC Tests PATCH /posts/{id}" time="2.593">
+    </testcase>
+    <testcase classname="POC Tests DELETE /posts/{id}" name="POC Tests DELETE /posts/{id}" time="0.813">
+    </testcase>
+  </testsuite>
+</testsuites>
