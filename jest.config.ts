@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import type { Config  } from 'jest';
 const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -14,7 +14,7 @@ const config: Config = {
       "includeSuiteFailure": true,
       "darkTheme": true,
       "logoImgPath": null,
-      "openReport": true,
+      "openReport": false,
       "urlForTestFiles": "",
       "customInfos": [
         { title: "Environment", value: "QA"}, 
@@ -27,29 +27,25 @@ const config: Config = {
       "sort": "default", // https://github.com/Hargne/jest-html-reporter/wiki/Sorting-Methods
       "filename": "otalio-rest-api-result.html",
       "publicPath": 'reports',
+      "enableMergeData": true,
+      "dataMergeLevel": 10
     }],
     ['jest-junit',
       {
         outputDirectory: 'reports'
       }
+    ]
+  ],
+  transform: {
+    // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
+    // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+      },
     ],
-    // ['jest-html-reporters',
-    //   {
-    //     publicPath: 'reports',
-    //     pageTitle: "Otalio Test Report",
-    //     includeFailureMsg: true,
-    //     includeStackTrace: true,
-    //     includeConsoleLog: true,
-    //     includeSuiteFailure: true,
-    //     logo: null,
-    //     executionTimeWarningThreshold: 5,
-    //     dateFormat: "yyyy-mm-dd HH:MM:ss",
-    //     sort: "default", // https://github.com/Hargne/jest-html-reporter/wiki/Sorting-Methods
-    //     outputPath: "reports/otalio-rest-api-result.html",
-    //     customScriptPath: "reports"
-    //   }
-    // ]
-  ]
+  },
 };
 
 export default config;
