@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="2" failures="0" errors="0" time="4.517">
-  <testsuite name="BRAND Tests" errors="0" failures="0" skipped="0" timestamp="2023-09-02T09:07:01" time="4.378" tests="2">
-    <testcase classname="BRAND Tests GET /brands" name="BRAND Tests GET /brands" time="1.444">
-    </testcase>
-    <testcase classname="BRAND Tests GET /brands with query params" name="BRAND Tests GET /brands with query params" time="1.246">
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="3.977">
+  <testsuite name="Setup TEST" errors="0" failures="0" skipped="0" timestamp="2023-09-07T07:51:26" time="3.851" tests="1">
+    <testcase classname="Setup TEST GET POST SQL Connection Test" name="Setup TEST GET POST SQL Connection Test" time="2.463">
     </testcase>
   </testsuite>
 </testsuites>

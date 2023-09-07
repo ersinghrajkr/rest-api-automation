@@ -1,16 +1,14 @@
 import supertest, { SuperTest, Test } from 'supertest';
-import { Request, Response } from "supertest";
 import * as logNetworkTime from 'superagent-node-http-timings';
-import { IAppConfig } from '../types/appConfig.types';
 import CONFIG from './base.config'
-import { IRequestOptions } from '../types/httpRequest.types';
+import { IRequestOptions } from '../interface-types/httpRequest.interface';
 import InvalidRequestError from '../utils/errorHandling/invalidrequest.exception'
 
 
 class SUPERTEST_CLIENT {
     async get(options: IRequestOptions): Promise<supertest.Response> {
-        const { endpoint, queryParam, authToken, header } = options;
-        const baseURL = CONFIG.BASE_URL[options.baseURL];
+        const { endpoint, queryParam, authToken, header, baseURL } = options;
+        // const baseURL = CONFIG.BASE_URL[options.baseURL];
         // console.log(baseURL, endpoint, queryParam, authToken, payload, header)
         if (!baseURL || !endpoint) {
             throw new InvalidRequestError(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);
@@ -31,8 +29,8 @@ class SUPERTEST_CLIENT {
 
 
     async post(options: IRequestOptions) {
-        const { endpoint, authToken, payload, header } = options;
-        const baseURL = CONFIG.BASE_URL[options.baseURL];
+        const { endpoint, authToken, payload, header, baseURL } = options;
+        console.log('post RequestOptions :', options)
         if (!baseURL || !endpoint) {
             throw new InvalidRequestError(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);
         }
@@ -41,7 +39,7 @@ class SUPERTEST_CLIENT {
             const postResponse = await requestHQ.post(options.endpoint.trim())
                 .send(payload)
                 .auth(authToken && typeof authToken === 'string' && authToken !== '' ? authToken : '', { type: "bearer" })
-                .set("Accept", typeof header === 'object' && Object.keys(header).length > 0 ? `${options.header}` : `application/json`);
+                .set(header? header: {"Content-Type" : "application/json", "Accept": "*/*", "Accept-Encoding": "gzip, deflate, br", "Connection": "keep-alive"});
             return postResponse;
         } catch (error) {
             error.message = `Error while making a POST call to ${baseURL}${endpoint}, ${error}`;
@@ -50,8 +48,8 @@ class SUPERTEST_CLIENT {
     }
 
     async put(options: IRequestOptions) {
-        const { endpoint, authToken, payload, header } = options;
-        const baseURL = CONFIG.BASE_URL[options.baseURL];
+        const { endpoint, authToken, payload, header, baseURL } = options;
+        // const baseURL = CONFIG.BASE_URL[options.baseURL];
         if (!baseURL || !endpoint) {
             throw new InvalidRequestError(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);
         }
@@ -68,15 +66,15 @@ class SUPERTEST_CLIENT {
         }
     }
 
-    patch(options: IRequestOptions) {
-        const { endpoint, authToken, payload, header } = options;
-        const baseURL = CONFIG.BASE_URL[options.baseURL];
+    async patch(options: IRequestOptions) {
+        const { endpoint, authToken, payload, header, baseURL } = options;
+        // const baseURL = CONFIG.BASE_URL[options.baseURL];
         if (!baseURL || !endpoint) {
             throw new InvalidRequestError(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);
         }
         try {
             let requestHQ = supertest(baseURL.trim());
-            const postResponse = requestHQ.patch(options.endpoint.trim())
+            const postResponse = await requestHQ.patch(options.endpoint.trim())
                 .send(payload)
                 .auth(authToken && typeof authToken === 'string' && authToken !== '' ? authToken : '', { type: "bearer" })
                 .set("Accept", typeof header === 'object' && Object.keys(header).length > 0 ? `${options.header}` : `application/json`);
@@ -88,8 +86,8 @@ class SUPERTEST_CLIENT {
     }
 
     async delete(options: IRequestOptions): Promise<supertest.Response> {
-        const { endpoint, queryParam, authToken, header } = options;
-        const baseURL = CONFIG.BASE_URL[options.baseURL];
+        const { endpoint, queryParam, authToken, header, baseURL } = options;
+        // const baseURL = CONFIG.BASE_URL[options.baseURL];
         // console.log(baseURL, endpoint, queryParam, authToken, payload, header)
         if (!baseURL || !endpoint) {
             throw Error(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);

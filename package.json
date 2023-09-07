@@ -4,8 +4,7 @@
   "description": "REST API Automation",
   "main": "index.js",
   "scripts": {
-    "test1": "jest --detectOpenHandles",
-    "test": "npx jest specs/**/*.spec.ts --detectOpenHandles"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

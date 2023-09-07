@@ -3,7 +3,7 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   verbose: false,
-  testMatch: ['**/specs/**/*.spec.{js,ts}'],
+  testMatch: ['**/**/*.spec.{js,ts}'],
   reporters: [ //https://github.com/Hargne/jest-html-reporter/wiki/configuration
     'default',
     ["./node_modules/jest-html-reporters", {

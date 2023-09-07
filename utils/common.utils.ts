@@ -1,4 +1,3 @@
-import { IAppConfig } from "../types/appConfig.types";
 
 class CommonUtils {
 
