@@ -23,15 +23,14 @@ const requestOptions: IRequestOptions = {
 
 
 describe('Setup TEST', () => {
-
+    const globalVariablesInstance = GlobalVariables.getInstance()
     it('GET POST SQL Connection Test', async () => {
-        let globalVar = GlobalVariables.getInstance()
         let sqlCon: any, oracleCon: any
         try {
-            let mysqlConInstance = MYSQL_DB_CONNECTION.getInstance()
-            sqlCon = await mysqlConInstance.getConnection();
-            let oracleConInstance = ORACLE_DB_CONNECTION.getInstance()
-            oracleCon = await oracleConInstance.getConnection('QA')
+            // let mysqlConInstance = MYSQL_DB_CONNECTION.getInstance()
+            // sqlCon = await mysqlConInstance.getConnection();
+            // let oracleConInstance = ORACLE_DB_CONNECTION.getInstance()
+            // oracleCon = await oracleConInstance.getConnection('QA')
             // console.log('oracleCon currentSchema -',oracleCon?.currentSchema);
             // const [rows, fields] = await sqlCon?.execute(`Select * from user;`);
             // const results = await oracleCon?.execute(`SELECT * FROM guest_profile WHERE last_name like 'ARNOLD150%'`);
@@ -39,16 +38,16 @@ describe('Setup TEST', () => {
             // console.log('MYSQL_DB_CONNECTION - ', rows, '\n TABLE FIELDS: ', fields);
             // console.log('ORACLE_DB_CONNECTION -', results.rows,'\n TABLE FIELDS: ', results.metaData);
             // console.log('SUPERTEST_CLIENT- HQ ', requestResponse.body);
-            await globalVar.setAuthToken(APP_CONFIG.ENVIRONMENTS.SHIP2_CONFIG.EMAIL, APP_CONFIG.ENVIRONMENTS.SHIP2_CONFIG.PASSWORD, APP_CONFIG.ENVIRONMENTS.SHIP2_CONFIG.BASE_URL);
-            requestOptionsSHIP.authToken = globalVar.getAuthToken()
+            requestOptionsSHIP.authToken = await globalVariablesInstance.getAuthToken();
             const requestResponseSHIP2 = await SUPERTEST_CLIENT.get(requestOptionsSHIP);
-            console.log('Response Body: ',  requestResponseSHIP2.body);
+            expect(requestResponseSHIP2.status).toBe(200)
+            // console.log('Response Body: ',  requestResponseSHIP2.body);
         } catch (error) {
             console.log(error)
             throw error;
         }finally{
-            await sqlCon?.destroy();
-            await oracleCon?.close();
+            // await sqlCon?.destroy();
+            // await oracleCon?.close();
             console.log('Finally Executed')
         }
     })

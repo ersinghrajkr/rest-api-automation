@@ -3,7 +3,7 @@ import * as dateFn from 'date-fns';
 import countries from "i18n-iso-countries";
 
 class PersonDynamicData {
-    private static SEX = faker.name.sexType();
+    private static SEX = faker.person.sexType();
     private static uniqueID = dateFn.getUnixTime(new Date());
     public static getGender() {
         let GENDER: any
@@ -17,7 +17,7 @@ class PersonDynamicData {
     }
 
     public static personProfileData() {
-        let countryName = faker.address.country();
+        let countryName = faker.location.country();
         return {
             guestProfileId: `PBX${this.uniqueID}`,
             visitorProfileId: `VIS${this.uniqueID}`,
@@ -57,8 +57,10 @@ class PersonDynamicData {
     public static personCommuncationData() {
         let countryName = faker.location.country();
         return {
-            email: `${dateFn.getUnixTime(new Date())}@otalio.com`,
-            phone: faker.phone.number('+919#########'),
+            email1: `email1${dateFn.getUnixTime(new Date())}@otalio.com`,
+            email2: `email2${dateFn.getUnixTime(new Date())}@otalio.com`,
+            phone1: faker.phone.number('+919#########'),
+            phone2: faker.phone.number('+918#########'),
         }
     }
 }

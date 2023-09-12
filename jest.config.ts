@@ -3,7 +3,11 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   verbose: false,
+  injectGlobals: true,
   testMatch: ['**/**/*.spec.{js,ts}'],
+  setupFiles: [],
+  globalSetup: "./test/jest.setup.ts",
+  globalTeardown: "./test/jest.teardown.ts",
   reporters: [ //https://github.com/Hargne/jest-html-reporter/wiki/configuration
     'default',
     ["./node_modules/jest-html-reporters", {

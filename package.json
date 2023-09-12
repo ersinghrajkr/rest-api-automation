@@ -4,13 +4,12 @@
   "description": "REST API Automation",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles"
+    "test": "jest --runInBand --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@elastic/elasticsearch": "^8.9.0",
     "@faker-js/faker": "^8.0.2",
     "@jest/reporters": "^29.6.4",
     "@types/jest": "^29.5.4",

@@ -1,11 +1,11 @@
 import supertest, { SuperTest, Test } from 'supertest';
 import * as logNetworkTime from 'superagent-node-http-timings';
-import CONFIG from './base.config'
 import { IRequestOptions } from '../interface-types/httpRequest.interface';
 import InvalidRequestError from '../utils/errorHandling/invalidrequest.exception'
-
+// import GlobalVariables from './global.variables';
 
 class SUPERTEST_CLIENT {
+    // private globalVariables = GlobalVariables.getInstance()
     async get(options: IRequestOptions): Promise<supertest.Response> {
         const { endpoint, queryParam, authToken, header, baseURL } = options;
         // const baseURL = CONFIG.BASE_URL[options.baseURL];
@@ -28,9 +28,14 @@ class SUPERTEST_CLIENT {
     }
 
 
+    /**
+     * 
+     * @param options 
+     * @returns 
+     */
     async post(options: IRequestOptions) {
         const { endpoint, authToken, payload, header, baseURL } = options;
-        console.log('post RequestOptions :', options)
+        // console.log('post RequestOptions :', options)
         if (!baseURL || !endpoint) {
             throw new InvalidRequestError(`Given Base URL & Endpoint: ${baseURL}${endpoint} is not valid`);
         }
@@ -39,7 +44,7 @@ class SUPERTEST_CLIENT {
             const postResponse = await requestHQ.post(options.endpoint.trim())
                 .send(payload)
                 .auth(authToken && typeof authToken === 'string' && authToken !== '' ? authToken : '', { type: "bearer" })
-                .set(header? header: {"Content-Type" : "application/json", "Accept": "*/*", "Accept-Encoding": "gzip, deflate, br", "Connection": "keep-alive"});
+                .set(header ? header : { "Content-Type": "application/json", "Accept": "*/*", "Accept-Encoding": "gzip, deflate, br", "Connection": "keep-alive" });
             return postResponse;
         } catch (error) {
             error.message = `Error while making a POST call to ${baseURL}${endpoint}, ${error}`;
@@ -106,7 +111,15 @@ class SUPERTEST_CLIENT {
         }
     }
 
-
+    async setAuthToken(email: string, password: string, envURL: string, endpoint = '/iam/v1/sso/login') {
+        try {
+            let requestData = { testId: null, baseURL: envURL, endpoint: endpoint, payload: { login: email, password }, queryParam: '' };
+            const response = await this.post(requestData);
+            return response.body.responsePayload.access_token;
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export default new SUPERTEST_CLIENT();

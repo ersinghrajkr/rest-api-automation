@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="3.977">
-  <testsuite name="Setup TEST" errors="0" failures="0" skipped="0" timestamp="2023-09-07T07:51:26" time="3.851" tests="1">
-    <testcase classname="Setup TEST GET POST SQL Connection Test" name="Setup TEST GET POST SQL Connection Test" time="2.463">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="4.391">
+  <testsuite name="Notification Event Type" errors="0" failures="0" skipped="0" timestamp="2023-09-12T04:39:40" time="1.723" tests="1">
+    <testcase classname="Notification Event Type POST - Event Type" name="Notification Event Type POST - Event Type" time="1.441">
+    </testcase>
+  </testsuite>
+  <testsuite name="Setup TEST" errors="0" failures="0" skipped="0" timestamp="2023-09-12T04:39:42" time="1.472" tests="1">
+    <testcase classname="Setup TEST GET POST SQL Connection Test" name="Setup TEST GET POST SQL Connection Test" time="1.338">
+    </testcase>
+  </testsuite>
+  <testsuite name="AUTH TOKEN " errors="0" failures="0" skipped="0" timestamp="2023-09-12T04:39:43" time="1.04" tests="1">
+    <testcase classname="AUTH TOKEN  GET Auth Token " name="AUTH TOKEN  GET Auth Token " time="0.913">
     </testcase>
   </testsuite>
 </testsuites>
